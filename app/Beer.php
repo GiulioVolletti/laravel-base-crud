@@ -11,5 +11,5 @@ class Beer extends Model
     'marca',
     'prezzo',
     'gradazione_alcolica',
-  ]
+  ];
 }

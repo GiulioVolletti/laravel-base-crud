@@ -25,7 +25,18 @@
             </tr>
           </thead>
           <tbody>
-            
+            @foreach ($beers as $beer)
+              <tr>
+                <td>{{ $beer->id }}</td>
+                <td>{{ $beer->nome_birra }}</td>
+                <td>{{ $beer->marca }}</td>
+                <td>{{ $beer->prezzo }}</td>
+                <td>{{ $beer->gradazione_alcolica }}</td>
+                <td>{{ $beer->created_at }}</td>
+                <td>{{ $beer->updtated_at }}</td>
+
+              </tr>
+            @endforeach
           </tbody>
         </table>
 
