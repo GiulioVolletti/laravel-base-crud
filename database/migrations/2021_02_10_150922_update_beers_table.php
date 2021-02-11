@@ -26,7 +26,7 @@ class UpdateBeersTable extends Migration
     public function down()
     {
         Schema::table('beers', function (Blueprint $table) {
-            //
+            $table->tinyInteger('gradazione_alcolica')->change();
         });
     }
 }

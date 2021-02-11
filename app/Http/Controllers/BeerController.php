@@ -18,7 +18,7 @@ class BeerController extends Controller
       // dd($beers);
 
 
-      return view('index', compact('beers'));
+      return view('beers-folder.index', compact('beers'));
     }
 
     /**
@@ -28,7 +28,7 @@ class BeerController extends Controller
      */
     public function create()
     {
-        //
+      return view('beers-folder.create');
     }
 
     /**
@@ -39,7 +39,10 @@ class BeerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        dd($data);
+
+        //$beer->save();
     }
 
     /**
@@ -51,8 +54,10 @@ class BeerController extends Controller
     public function show(Beer $beer)
     {
       // $beer = Beer::find($id);
-      dd($beer);
+      // $beer = Beer::findOrFail($id);
+      // dd($beer);
 
+      return view('beers-folder.show', compact('beer'));
     }
 
     /**
