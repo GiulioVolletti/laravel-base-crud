@@ -20,10 +20,10 @@
       @foreach ($beers as $beer)
       <tr>
         <td>{{ $beer->id }}</td>
-        <td>{{ $beer->nome_birra }}</td>
+        <td> <strong>{{ $beer->nome_birra }}</strong> </td>
         <td>{{ $beer->marca }}</td>
-        <td>{{ $beer->prezzo }}</td>
-        <td>{{ $beer->gradazione_alcolica }}</td>
+        <td>{{ $beer->prezzo }} <strong>&#8364;</strong></td>
+        <td>{{ $beer->gradazione_alcolica }} <strong> %</strong> </td>
         <td>{{ $beer->created_at }}</td>
         <td>{{ $beer->updated_at }}</td>
         <td>
