@@ -13,7 +13,7 @@
     @endforeach
   </table>
   <div class="text-right">
-    <a href="{{ route('beers-folder.index')}}"  class="btn btn-outline-dark">Torna alla lista</a>
+    <a href="{{ route('beers.index')}}"  class="btn btn-outline-dark">Torna alla lista</a>
 
   </div>
 
