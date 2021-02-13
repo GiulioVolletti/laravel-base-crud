@@ -6,7 +6,13 @@ use Illuminate\Http\Request;
 use App\Beer;
 
 class BeerController extends Controller
-{
+{   
+    private $beerValidation = [
+      'nome_birra' => 'required | max:30',
+      'marca' => 'required | max:20',
+      'prezzo' => 'required | numeric',
+      'gradazione_alcolica' => 'required | numeric',
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -41,19 +47,20 @@ class BeerController extends Controller
     {
         $data = $request->all();
         //dd($data);
-        $request->validate([
-          'nome_birra' => 'required | max:30',
-          'marca' => 'required | max:20',
-          'prezzo' => 'required | numeric',
-          'gradazione_alcolica' => 'required | numeric',
-        ]);
+        $request->validate($this->beerValidation);
 
         $beer = new Beer();
+
+        // complete
         $beer->nome_birra = $data['nome_birra'];
         $beer->marca = $data['marca'];
         $beer->prezzo = $data['prezzo'];
         $beer->gradazione_alcolica = $data['gradazione_alcolica'];
         $result = $beer->save();
+
+        // fill
+        // $beer = fill($data);
+        // $result = $beer->save();
 
         $lastAddBeer = Beer::orderBy('id', 'DESC')->first();
         return redirect()->route('beers.show', $lastAddBeer );
@@ -81,9 +88,11 @@ class BeerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Beer $beer)
     {
-        //
+      // return 'modifica birra '. $id;
+      // return view('beers-folder.edit', $id);
+      return view('beers-folder.edit', compact('beer'));
     }
 
     /**
@@ -93,9 +102,17 @@ class BeerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Beer $beer)
     {
-        //
+      
+      //dd($request->all());
+      $data = $request->all();
+      $request->validate($this->beerValidation);
+
+
+      $beer->update($data);
+
+      return redirect()->route('beers.index')->with('message', 'Prodotto '.$beer->nome_birra.' aggiornato correttamente!')->with('class', 'alert-success');
     }
 
     /**
@@ -104,8 +121,10 @@ class BeerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Beer $beer)
     {
-        //
+      //dd($beer);
+      $beer->delete();
+      return redirect()->route('beers.index')->with('message', 'Prodotto '.$beer->nome_birra.' eliminato correttamente!')->with('class', 'alert-success');
     }
 }

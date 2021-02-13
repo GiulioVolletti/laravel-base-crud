@@ -3,6 +3,13 @@
 @section('main')
   <h1>DB Beers</h1>
 
+  @if (session('message'))
+    <div class="alert {{session('class')}}">
+      {{session('message')}}
+    </div>
+      
+  @endif
+
   <table class="table table-striped">
     <thead class="thead-dark">
       <tr>
@@ -13,6 +20,8 @@
         <th>Gradazione alcolica</th>
         <th>Creazione</th>
         <th>Data Aggiornamento</th>
+        <th></th>
+        <th></th>
         <th></th>
       </tr>
     </thead>
@@ -27,8 +36,18 @@
         <td>{{ $beer->created_at }}</td>
         <td>{{ $beer->updated_at }}</td>
         <td>
-          <!-- <a class="btn btn-outline-dark" href="{{ route('beers.show', ['beer' => $beer->id])}}">Vai A</a> -->
-          <a class="btn btn-outline-dark" href="{{ route('beers.show', $beer->id)}}">Vai A</a>
+          <!-- <a class="btn btn-outline-dark" href="{//{ route('beers.show', ['beer' => $beer->id])}}">Vai A</a> -->
+          <a class="btn btn-outline-dark" href="{{ route('beers.show', $beer->id)}}"> <i class="fas fa-search-plus"></i></a>
+        </td>
+        <td>
+          <a class="btn btn-outline-dark" href="{{ route('beers.edit', $beer->id)}}"><i class="fas fa-pencil-alt"></i></a>
+        </td>
+        <td>
+          <form action="{{route('beers.destroy', $beer->id)}}" method="post">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-outline-dark"><i class="fas fa-trash-alt"></i></button>
+          </form>
         </td>
 
       </tr>
