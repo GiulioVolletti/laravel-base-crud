@@ -43,7 +43,7 @@
           <a class="btn btn-outline-dark" href="{{ route('beers.edit', $beer->id)}}"><i class="fas fa-pencil-alt"></i></a>
         </td>
         <td>
-          <form action="{{route('beers.destroy', $beer->id)}}" method="post">
+          <form action="{{route('beers.destroy', $beer->id)}}" method="post" onsubmit="return confirm('Procedere alla cancellazione?')">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-outline-dark"><i class="fas fa-trash-alt"></i></button>

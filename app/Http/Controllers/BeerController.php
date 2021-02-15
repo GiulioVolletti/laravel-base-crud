@@ -52,15 +52,21 @@ class BeerController extends Controller
         $beer = new Beer();
 
         // complete
+        
         $beer->nome_birra = $data['nome_birra'];
         $beer->marca = $data['marca'];
         $beer->prezzo = $data['prezzo'];
         $beer->gradazione_alcolica = $data['gradazione_alcolica'];
         $result = $beer->save();
+        
 
-        // fill
-        // $beer = fill($data);
-        // $result = $beer->save();
+
+        // fill da completare
+        /*
+         $beer = fill($data);         
+         $result = $beer->save();
+         */
+        
 
         $lastAddBeer = Beer::orderBy('id', 'DESC')->first();
         return redirect()->route('beers.show', $lastAddBeer );
@@ -122,7 +128,7 @@ class BeerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Beer $beer)
-    {
+    {      
       //dd($beer);
       $beer->delete();
       return redirect()->route('beers.index')->with('message', 'Prodotto '.$beer->nome_birra.' eliminato correttamente!')->with('class', 'alert-success');
