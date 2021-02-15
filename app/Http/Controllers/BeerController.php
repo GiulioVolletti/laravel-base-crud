@@ -52,20 +52,20 @@ class BeerController extends Controller
         $beer = new Beer();
 
         // complete
-        
+        /*
         $beer->nome_birra = $data['nome_birra'];
         $beer->marca = $data['marca'];
         $beer->prezzo = $data['prezzo'];
         $beer->gradazione_alcolica = $data['gradazione_alcolica'];
         $result = $beer->save();
-        
+        */
 
 
         // fill da completare
-        /*
-         $beer = fill($data);         
+        
+         $beer->fill($data);         
          $result = $beer->save();
-         */
+        
         
 
         $lastAddBeer = Beer::orderBy('id', 'DESC')->first();
